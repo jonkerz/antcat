@@ -3,6 +3,19 @@ require 'spec_helper'
 describe ReferenceDocument do
   it { is_expected.to be_versioned }
 
+  describe 'callbacks' do
+    describe '#after_save' do
+      let!(:reference) { create :article_reference }
+      let!(:reference_document) { create :reference_document, reference: reference }
+
+      it "invalidates caches for its references" do
+        References::Cache::Regenerate[reference]
+
+        expect { reference_document.save! }.to change { reference.reload.plain_text_cache }.to(nil)
+      end
+    end
+  end
+
   it "makes sure it has a protocol" do
     stub_request(:any, "http://antcat.org/1.pdf").to_return body: "Hello World!"
     document = create :reference_document

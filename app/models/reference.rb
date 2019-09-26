@@ -34,6 +34,7 @@ class Reference < ApplicationRecord
   before_validation :set_year_from_citation_year
   before_save :set_author_names_caches
   before_destroy :check_not_referenced
+  after_save :invalidate_caches
 
   scope :latest_additions, -> { order(created_at: :desc) }
   scope :latest_changes, -> { order(updated_at: :desc) }

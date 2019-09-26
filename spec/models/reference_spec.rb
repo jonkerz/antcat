@@ -32,6 +32,18 @@ describe Reference do
   it { is_expected.to delegate_method(:url).to(:document).allow_nil }
   it { is_expected.to delegate_method(:downloadable?).to(:document).allow_nil }
 
+  describe 'callbacks' do
+    describe '#after_save' do
+      let!(:reference) { create :article_reference }
+
+      it "invalidates caches" do
+        References::Cache::Regenerate[reference]
+
+        expect { reference.save! }.to change { reference.reload.plain_text_cache }.to(nil)
+      end
+    end
+  end
+
   describe "scopes" do
     describe ".unreviewed_references" do
       let!(:unreviewed) { create :article_reference, review_state: "reviewing" }

@@ -4,6 +4,7 @@ class ReferenceDocument < ApplicationRecord
   validate :check_url
 
   before_validation :add_protocol_to_url
+  after_save :invalidate_reference_caches!
 
   has_attached_file :file,
     url: ':s3_domain_url',
@@ -75,5 +76,9 @@ class ReferenceDocument < ApplicationRecord
 
     def s3_url
       file.expiring_url 1.day.to_i # Seconds.
+    end
+
+    def invalidate_reference_caches!
+      reference&.invalidate_caches
     end
 end
