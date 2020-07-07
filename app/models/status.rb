@@ -10,6 +10,7 @@ class Status
     UNAVAILABLE               = "unavailable",
     EXCLUDED_FROM_FORMICIDAE  = "excluded from Formicidae",
     OBSOLETE_COMBINATION      = "obsolete combination",
+    OBSOLETE_CLASSIFICATION   = "obsolete classification",
     UNAVAILABLE_MISSPELLING   = "unavailable misspelling"
   ]
 
@@ -17,16 +18,18 @@ class Status
     SYNONYM                   => 'synonyms',
     HOMONYM                   => 'homonyms',
     OBSOLETE_COMBINATION      => 'obsolete combinations',
+    OBSOLETE_CLASSIFICATION   => 'obsolete classifications',
     UNAVAILABLE_MISSPELLING   => 'unavailable misspellings'
   }
 
-  PASS_THROUGH_NAMES = [OBSOLETE_COMBINATION, UNAVAILABLE_MISSPELLING]
+  PASS_THROUGH_NAMES = [OBSOLETE_COMBINATION, OBSOLETE_CLASSIFICATION, UNAVAILABLE_MISSPELLING]
   DISPLAY_HISTORY_ITEMS_VIA_PROTONYM_STATUSES = STATUSES - PASS_THROUGH_NAMES
 
   CURRENT_TAXON_VALIDATION = {
     presence: [
       SYNONYM,
       OBSOLETE_COMBINATION,
+      OBSOLETE_CLASSIFICATION,
       UNAVAILABLE_MISSPELLING
     ],
     absence: [

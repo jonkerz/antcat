@@ -96,6 +96,11 @@ FactoryBot.define do
       with_current_taxon
     end
 
+    trait :obsolete_classification do
+      status { Status::OBSOLETE_CLASSIFICATION }
+      with_current_valid_taxon
+    end
+
     trait :unidentifiable do
       status { Status::UNIDENTIFIABLE }
     end

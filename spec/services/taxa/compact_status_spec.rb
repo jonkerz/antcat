@@ -61,6 +61,16 @@ describe Taxa::CompactStatus do
         end
       end
 
+      context "when taxon status is 'obsolete classification'" do
+        let!(:current_taxon) { build_stubbed :genus }
+        let!(:taxon) { build_stubbed :species, :obsolete_classification, current_taxon: current_taxon }
+
+        specify do
+          expect(described_class[taxon]).
+            to eq "obsolete classification of #{taxon_link(current_taxon)}"
+        end
+      end
+
       context "when taxon status is 'unavailable misspelling'" do
         let!(:current_taxon) { build_stubbed :any_taxon }
         let!(:taxon) { build_stubbed :any_taxon, :unavailable_misspelling, current_taxon: current_taxon }

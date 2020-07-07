@@ -39,6 +39,7 @@ module Taxa
         when Status::SYNONYM                   then "junior synonym of #{link_current_taxon}"
         when Status::HOMONYM                   then "homonym replaced by #{link_homonym_replaced_by}"
         when Status::OBSOLETE_COMBINATION      then "obsolete combination of #{link_current_taxon}"
+        when Status::OBSOLETE_CLASSIFICATION   then "obsolete classification of #{link_current_taxon}"
         when Status::UNAVAILABLE_MISSPELLING   then "misspelling of #{link_current_taxon}"
         when *SELF_STATUSES                    then status
         else                                   raise "unknown status: #{status}"

@@ -62,6 +62,16 @@ describe Taxa::ExpandedStatus do
         end
       end
 
+      context "when taxon status is 'obsolete classification'" do
+        let!(:current_taxon) { create :genus }
+        let!(:taxon) { build_stubbed :species, :obsolete_classification, current_taxon: current_taxon }
+
+        specify do
+          expect(described_class[taxon]).
+            to eq "an obsolete classification of #{taxon_link_with_author_citation(current_taxon)}"
+        end
+      end
+
       context "when taxon status is 'unavailable misspelling'" do
         let!(:current_taxon) { create :any_taxon }
         let!(:taxon) { build_stubbed :any_taxon, :unavailable_misspelling, current_taxon: current_taxon }
