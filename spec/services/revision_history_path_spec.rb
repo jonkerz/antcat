@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe RevisionHistoryPath do
   describe "#call" do
-    specify { expect(described_class['Institution', 1]).to eq "/institutions/1/history" }
+    specify { expect(described_class['Institution', 1]).to eq "/ant_depositories/1/history" }
     specify { expect(described_class['Name', 1]).to eq "/names/1/history" }
     specify { expect(described_class['Protonym', 1]).to eq "/protonyms/1/history" }
     specify { expect(described_class['Reference', 1]).to eq "/references/1/history" }

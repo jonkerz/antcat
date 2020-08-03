@@ -1,9 +1,11 @@
+# TODO: Finish renaming to "ant depositories".
+
 Feature: Institutions
   Scenario: Adding an institution (with edit summary)
     Given I log in as a catalog editor named "Archibald"
 
     When I go to the Editor's Panel
-    And I follow "Edit institutions"
+    And I follow "Edit ant depositories"
     Then I should not see "CASC"
     And I should not see "California Academy of Sciences"
 

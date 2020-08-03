@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   get '/documents/:id/:file_name', to: 'references/downloads#show', file_name: /.+/
 
-  resources :institutions do
+  resources :ant_depositories, as: :institutions, controller: :institutions do
     scope module: :institutions do
       resource :history, only: :show
     end
