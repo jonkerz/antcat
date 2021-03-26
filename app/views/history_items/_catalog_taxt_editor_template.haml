@@ -2,6 +2,9 @@
   .taxt-presenter
     =Detax[history_item.to_taxt]
 
+    -if history_item.deleted?
+      %span.bold-warning fake-deleted!
+
     %br
 
   .taxt-editor-editor.callout

@@ -16,6 +16,9 @@
 
     =Detax[history_item.to_taxt]
 
+    -if history_item.deleted?
+      %span.bold-warning fake-deleted!
+
   .taxt-editor-editor
     %h6.bold.small-margin-bottom=history_item.type_label
     -# [grep:history_type].
