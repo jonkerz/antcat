@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+  echo "WARNING! Destructive command. Can only be run in the dev env."
+  echo
+  echo "Usage: RAILS_ENV=development ./script/$(basename $0)"
+  exit 0
+fi
+
+set -euo pipefail
+
+
+[ "${RAILS_ENV:-}" != "development" ] && echo "RAILS_ENV must be 'development'" && exit 1
+
+echo "*** Executing $0"
+
+full_path=$(realpath "$0")
+dir_path=$(dirname "$full_path")
+
+relative_root_path="$(dirname "$full_path")/.."
+root_path="$(readlink -m "$relative_root_path")"
+
+read -r -p "Clean ${root_path}? [y to continue] " input
+if [ "$input" != "y" ]; then exit; fi
+
+set -x
+rm -rf "${root_path}/coverage"
+rm -rf "${root_path}/log"
+rm -rf "${root_path}/node_modules"
+rm -rf "${root_path}/pids"
+rm -rf "${root_path}/public/packs"
+rm -rf "${root_path}/public/packs-test"
+rm -rf "${root_path}/solr/default/data"
+rm -rf "${root_path}/solr/development/data"
+rm -rf "${root_path}/solr/pids"
+rm -rf "${root_path}/solr/test/data"
+rm -rf "${root_path}/spec/examples.txt"
+rm -rf "${root_path}/tmp"
+rm -rf "${root_path}/vendor/bundle/ruby"
