@@ -181,6 +181,10 @@ Metrics/PerceivedComplexity:
 
 ### Naming.
 
+# TODO: Check if we want to enable this.
+Naming/BlockForwarding:
+  Enabled: false
+
 Naming/MemoizedInstanceVariableName:
   EnforcedStyleForLeadingUnderscores: required
 
@@ -443,6 +447,9 @@ Style/GlobalStdStream:
 
 # Disabled because it wants to split up independent/logical chunks of code.
 Style/GuardClause:
+  Enabled: false
+
+Style/HashSyntax:
   Enabled: false
 
 # Disabled to avoid trailing "surprise if"s.
